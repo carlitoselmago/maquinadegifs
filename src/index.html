@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>maquina de gifs</title>
+    <style>
+    @keyframes rotar {
+        0% {
+            transform: perspective( 600px) rotateY( 45deg);
+        }
+        50% {
+            transform: perspective( 600px) rotateY( -45deg);
+        }
+        100% {
+            transform: perspective( 600px) rotateY( 45deg);
+        }
+    }
+    
+    img {
+        width: 300px;
+        position: absolute;
+        animation-name: rotar;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        border-radius: 12px;
+    }
+    </style>
+</head>
+
+<body>
+    <img src="184.gif" alt="" style="top:300px;" />
+    <img src="193.gif" alt="" style="left:300px;top:200px;" />
+    <img src="307.gif" alt="" style="left:300px;top:400px;" />
+    <img src="307.gif" alt="" style="left:300px;top:400px;" />
+</body>
+
+</html>
