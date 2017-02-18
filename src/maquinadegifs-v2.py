@@ -1,55 +1,31 @@
 from moviepy.editor import *
+import moviepy.video.io.preview as preview
+import pygame as pg
 import numpy as np
-import cv2
+import sys
+
+mainClip=VideoFileClip("videos/test.mp4")
 
 segundosDuracion=3
 
-segundosParaCrearGifs=[]
-frameCount=0
+screen = pg.display.set_mode((mainClip.size))
 
-videoURL='videos/pimpflaco.mkv'
-
-cap = cv2.VideoCapture(videoURL)
-fps = int(cap.get(5))
-
-print fps
-
-while(cap.isOpened()):
+for segundo in np.arange(1.0 / mainClip.fps, mainClip.duration-.001, 1.0 / mainClip.fps):
+    img = mainClip.get_frame(segundo)
     
-    frameCount+=1
+    for event in pg.event.get():
+        if event.type == pg.KEYDOWN:
+            
+            if event.key == pg.K_ESCAPE:
+                sys.exit()
+            
+            if event.key == pg.K_SPACE: #tecla G
+                print "captura en segundo "+str(segundo)
+                
+                empieza=segundo
+                acaba=segundo+segundosDuracion
+                clip = mainClip.subclip(empieza,acaba).resize(width=400)
+                clip.write_gif("gifs/test"+str(segundo)+".gif",fps=10,program='ImageMagick',opt='optimizeplus')
     
-    #leer cada frame del video
-    ret, frame = cap.read()
-    
-    #hacer el reproductor mas pequeno
-    frame=cv2.resize(frame,None,fx=0.5, fy=0.5)
-    cv2.imshow('frame',frame)
-    
-    #escuchamos teclas
-    teclaPulsada= cv2.waitKey(fps)
-    
-    if teclaPulsada == ord('g'):
-        
-        segundoCaptura=frameCount/fps
-        
-        print segundoCaptura
-        segundosParaCrearGifs.append(segundoCaptura)
-        
-    if teclaPulsada == ord('q'):
-        break
-  
- 
-print segundosParaCrearGifs
-
-#vamos a crear los gifs
-
-mainclip=VideoFileClip(videoURL)
-
-for segundo in segundosParaCrearGifs:
-    empieza = segundo
-    acaba = segundo+segundosDuracion
-    clip = mainclip.subclip(empieza,acaba).resize(width=400)
-    clip.write_gif("gifs/pimpflaco"+str(segundo)+".gif",fps=10,program='ImageMagick',opt='optimizeplus')
-
-cap.release()
-cv2.destroyAllWindows()
+    #dibujar pantalla
+    preview.imdisplay(img, screen)
