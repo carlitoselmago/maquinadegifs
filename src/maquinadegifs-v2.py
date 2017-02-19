@@ -4,7 +4,9 @@ import pygame as pg
 import numpy as np
 import sys
 
-mainClip=VideoFileClip("videos/test.mp4")
+nombreGIFS="northwest"
+
+mainClip=VideoFileClip("videos/northwest.webm")
 
 segundosDuracion=3
 
@@ -25,7 +27,7 @@ for segundo in np.arange(1.0 / mainClip.fps, mainClip.duration-.001, 1.0 / mainC
                 empieza=segundo
                 acaba=segundo+segundosDuracion
                 clip = mainClip.subclip(empieza,acaba).resize(width=400)
-                clip.write_gif("gifs/test"+str(segundo)+".gif",fps=10,program='ImageMagick',opt='optimizeplus')
+                clip.write_gif("gifs/"+nombreGIFS+str(segundo)+".gif",fps=10,program='ImageMagick',opt='optimizeplus')
     
     #dibujar pantalla
     preview.imdisplay(img, screen)

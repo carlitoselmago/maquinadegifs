@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>maquina de gifs</title>
+        <style>
+            @keyframes rotar1 {
+                0% {
+                    transform: perspective( 600px) rotateY( 0deg);
+                }
+                100% {
+                    transform: perspective( 600px) rotateY( 360deg);
+                }
+            }
+            @keyframes rotar2 {
+                0% {
+                    transform: perspective( 600px) rotateY( 120deg);
+                }
+                100% {
+                    transform: perspective( 600px) rotateY( 480deg);
+                }
+            }
+            @keyframes rotar3 {
+                0% {
+                    transform: perspective( 600px) rotateY( 240deg);
+                }
+                100% {
+                    transform: perspective( 600px) rotateY( 600deg);
+                }
+            }
+
+            #firegroup{
+                position: absolute;
+                margin-left: 35%;
+                margin-top: 30%;
+            }
+
+            .fire  {
+                width: 300px;
+                height: 150px;
+                position: absolute;
+                animation-duration: 4s;
+                animation-iteration-count: infinite;
+                border-radius: 12px;
+                animation-timing-function: linear;
+            }
+
+
+            .fire1  {
+                animation-name: rotar1;
+            }
+            .fire2 {
+                animation-name: rotar2;
+            }
+            .fire3 {
+                animation-name: rotar3;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <div id="firegroup">
+            <img class="fire fire1" src="../gifs/fire.gif" alt=""  />
+
+            <img class="fire fire2" src="../gifs/fire2.gif" alt=""/>
+
+            <img class="fire fire3" src="../gifs/fire3.gif" alt=""  />
+        </div>
+    </body>
+
+</html>
